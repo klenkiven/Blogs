@@ -82,7 +82,6 @@ public class Print {
     }
 }
 ```
-
 ## **二、Java访问权限修饰词**
 
 > 权限修饰词`public`, `private`和`protected`（包访问权限又是也被称为`friendly`）
