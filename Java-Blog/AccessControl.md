@@ -42,7 +42,7 @@ public class MyClass {
 java包的命名用域名的方式来命名。众所周知，域名是不会重复的，是唯一的。这样的好处是，可以减少重复，而且方便别人的记忆。
 
 环境变量`CLASSPATH`可以提供查找包的位置并且是**全局的**！
-> CLASSPATH=.;D:\JAVA\JPackage
+> CLASSPATH=.;D:\JAVA\Package
 
 承接上文内容，`java.util.*`和`my.mypackage.*`均存在一个类，叫做`Vector`那么，
 ```java
