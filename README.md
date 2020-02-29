@@ -10,6 +10,8 @@ Java-Blog/
 + Method.md
 + ReusingClass.md
 + this_KeyWord.md
++ FileClassUse.md
++ IOStreamOverview.md
 
 LCENSE
 README.md
