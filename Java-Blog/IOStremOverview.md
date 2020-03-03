@@ -356,8 +356,8 @@ public void BufferedStreamTest() {
         //4.关闭流
         //要求：先关闭外层的流，再关闭内层的流
         try {
-            if (bos != null)
-                bos.close();
+            if (bis != null)
+                bis.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -387,3 +387,262 @@ public void BufferedStreamTest() {
 |   **运行时间**   | 7175 ms | 1593 ms |
 
 从上面的实验可知Buffered流速度更快。
+
+## 转换流
+
++ 转换流提供了在**字节流**和**字符流**之间的转换
+
++ 用于转换不同的字符编码
+
++ 转换流的相关类：
+
+  + InputStreamReader：
+
+    将一个字节的输入流转换为字符的输入流。
+
+  + OutputStreamWriter：
+
+    将一个字符的输出流转换为字节的输出流。
+
++ 解码：字节、字节数组 ===>  *字符、字符数组*
++ 编码：*字符、字符数组* ===>  字节、字节数组
++ 字符集：UTF-8，gbk等等。
+
+```java
+/*
+* 此时异常处理，也应该使用try-catch
+* InputStreamReader实现字节的输出流到字符的输入流的转换
+*/
+public void test1() throws IOException {
+    FileInputStream fis = new FileInputStream("IOTest/test.txt");
+    //参数2声明了字符集，具体使用那个字符集取决于文件
+    InputStreamReader isr = new InputStreamReader(fis, "UTF-8");  //系统默认的字符集是UTF-8
+
+    char[] cbuf = new char[20];
+    int len;
+    while ((len = isr.read(cbuf)) != -1){
+        String str = new String(cbuf, 0, len);
+        System.out.print(str);
+    }
+
+    isr.close();
+}
+```
+
+### 转换流实现文件的转码
+
+```java
+//实现文件转码的操作
+//综合使用InputStreamReader和OutputStreamWriter
+public void test2() {
+    InputStreamReader isr = null;
+    OutputStreamWriter osw = null;
+
+    try {
+        //创建文件对象
+        File file1 = new File("IOTest/test.txt");
+        File file2 = new File("IOTest/test-gbk.txt");
+
+        //创建文件流对象
+        FileInputStream fis = new FileInputStream(file1);
+        FileOutputStream fos = new FileOutputStream(file2);
+
+        //创建转换流的对象
+        isr = new InputStreamReader(fis, "UTF-8");
+        osw = new OutputStreamWriter(fos, "gbk");
+
+        //读写过程
+        char[] cbuf = new char[20];
+        int len;
+        while ((len = isr.read(cbuf)) != -1) {
+            osw.write(cbuf, 0, len);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        //施行关闭流操作
+        if (isr != null) {
+            try {
+                isr.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (osw != null) {
+            try {
+                osw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+}
+```
+
+### 字符集
+
++ **ASCII**：美国标准信息交换码。
++ **ISO8859-1**：拉丁码表，欧洲码表。
++ **GB2312**：中国的中文码表，最多两个字节编码所有字符。
++ **GBK**：中国的中文编码表升级，融合了更多的中文文字符号，最多两个字节编码
++ **Unicode**：国际编码，融合了目前人类是同的所有字符，位每个字符分配唯一的字符码。
++ **UTF-8**：变长的编码方式，可用1-4个字节来表示一个字符。
+
+ ## 标准的输入输出流
+
+1. 标准的输入输出流
+
+   **System.in**：标准的输入流，默认从键盘输入。
+
+   **System.out**：标准的输出流，默认从控制台输出。
+
+2. System类的setIn(InputStream in) / setOut(PrintStream out) 方法重新指定输入和输出的方式
+
+#### 小练习：输入字符串，“e”结束程序
+
+```java
+public void StranderdIOStream() {
+    BufferedReader br = null;
+
+    try {
+        //创建一个转换流
+        InputStreamReader isr = new InputStreamReader(System.in);
+        br = new BufferedReader(isr);
+
+        while (true) {
+            System.out.println("请输入字符串：");
+            String data = br.readLine();
+            if (data.equalsIgnoreCase("e") || data.equalsIgnoreCase("exit")){
+                System.out.println("程序结束");
+                break;
+            }
+
+            String upperCase = data.toUpperCase();
+            System.out.println(upperCase);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        //关闭流
+        if (br != null) {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+## 打印流(了解)
+
++ 实现将**基本数据类型**的数据格式化为**字符串**输出
+
++ 打印流**PrintStream**和**PrintWriter**：
+
+  + 提供一系列重载的print()和println()方法，用于**多种类型的输出**。
+
+  + PrintStream和PrintWriter**不会抛出**IOException异常
+
+  + PrintStream和PrintWriter有**自动flush功能**
+
+    > 自动刷新模式（写入换行符或者字节 '\n'时都会刷新缓冲区）
+
+  + PrintStream打印的所有字符都使用平台的默认字符编码转换为字节。在需要写入字符而不是写入字节的情况下，应该使用PrintWriter类。
+
+  + System.out返回的是**PrintStream**的实例
+
+```java
+public void PrintStreamTest() {
+    PrintStream ps = null;
+    try {
+        FileOutputStream fos = new FileOutputStream(new File("IOTest/testOutput.txt"));
+        //创建打印输出流，设置为自动刷新模式（写入换行符或者字节 '\n'时都会刷新缓冲区）
+        ps = new PrintStream(fos, true);
+        if (ps != null)  //把标准输出流（控制台输出）改成文件输出
+            System.setOut(ps);
+
+
+        for (int i = 0; i <= 255; i++) {   //输出ASCII字符
+            System.out.print((char)i);
+            if (i%50 == 0)    //每50个数换一行
+                System.out.println();  //换行
+        }
+
+
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } finally {
+        if (ps != null)
+            ps.close();
+    }
+}
+```
+
+## 数据流(了解)
+
++ 方便操作java语言的基本数据类型和String的数据，可以使用数据流。
++ 数据流有两个类：
+  + **DataInputStream**和**DataOutputStream**
+  + 作用：用于读取和写出基本数据类型的变量或字符串。
+
+```java
+//写入数据到文件中
+public void dataOutputStreamTest(){
+
+    DataOutputStream dos = null;
+    try {
+        dos = new DataOutputStream(new FileOutputStream("IOTest/data.txt"));
+
+        dos.writeUTF("ABC");
+        dos.flush();  //刷新一下将数据写入文件
+        dos.writeInt(345);
+        dos.flush();
+        dos.writeBoolean(true);
+        dos.flush();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        if (dos != null) {
+            try {
+                dos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+//从文件中读取数据
+public void dataInputStreamTest() {
+
+    DataInputStream dis = null;
+    try {
+        dis = new DataInputStream(new FileInputStream("IOTest/data.txt"));
+        //读取文件中的数据
+        String name = dis.readUTF();
+        int age = dis.readInt();
+        boolean sex = dis.readBoolean();
+
+        System.out.println("name = " + name);
+        System.out.println("age = " + age);
+        System.out.println("sex = " + sex);
+        
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        //关闭流
+        if (dis != null) {
+            try {
+                dis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+**注意！！！** 在读取文件时，一定要读取顺序与写入顺序一致，否则文件读取时会出现错误。
