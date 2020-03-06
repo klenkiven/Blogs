@@ -405,7 +405,9 @@ public void BufferedStreamTest() {
     将一个字符的输出流转换为字节的输出流。
 
 + 解码：字节、字节数组 ===>  *字符、字符数组*
+
 + 编码：*字符、字符数组* ===>  字节、字节数组
+
 + 字符集：UTF-8，gbk等等。
 
 ```java
@@ -646,3 +648,310 @@ public void dataInputStreamTest() {
 ```
 
 **注意！！！** 在读取文件时，一定要读取顺序与写入顺序一致，否则文件读取时会出现错误。
+
+## 对象流
+
++ 数据流有两个类：
+  + **ObjectInputStream**和**ObjectOutputStream**
++ 用于存储和读取**基本数据类型**数据或**对象**的处理流。把Java中的对象写入数据源中，也能把对象从数据源中还原回来。
++ **序列化**：用ObjectOutputStream类**保存**基本数据类型或对象的机制。
++ **反序列化**：用ObjectInputStream类**读取**基本数据或对象的机制
++ ObjectOutputStream和ObjectInputStream不能序列化***static***和***transient***修饰的成员变量
+
+### 序列化机制
+
++ **对象序列化机制**允许把内存中的Java对象转换成平台无关的二:进制流，从而允许把这种二进制流持久地保存在磁盘上，或通过网络将这种二进制流传输到另一个网络节点。//当其它程序获取了这种二进制流，就可以恢复成原来的Java对象。
++ 序列化的好处在于可将任何实现了**Serializable接口**的对象转化为**字节数据**，使其在保存和传输时可被还原。
++ 序列化是**RMI** ( **Remote Method Invoke -**远程方法调用)过程的参数和返回值都必须实现的机制，而**RMI**是**JavaEE**的基础。因此序列化机制是JavaEE平台的基础。
++ 如果需要让某个对象支持序列化机制，则必须让对象所属的类及其属性是可序列化的，为了让某个类是可序列化的，该类必须实现如下两个接口之一。否则，会抛出**NotSerializableException**异常
+  + **Serializable**
+  + **Externalizable**
+
+```java
+/*
+序列化过程：将内存中的java对象中保存到磁盘，或者通过网络传输出去
+ */
+@Test
+public void testObjectOutputStream() {
+
+    ObjectOutputStream oos = null;
+    try {
+        oos = new ObjectOutputStream(new FileOutputStream("IOTest/object.dat"));
+
+        oos.writeObject(new String("Hello World"));
+        oos.flush(); //刷新操作，将东西从缓冲区到文件中去
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        //关闭流
+        if (oos != null) {
+            try {
+                oos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+/*
+反序列化过程：将磁盘文件中的对象还原为内存中的一个Java对象
+ */
+@Test
+public void testObjectInputStream() {
+    ObjectInputStream ois = null;
+    try {
+        //创建对象流
+        ois = new ObjectInputStream(new FileInputStream("IOTest/object.dat"));
+        //读取数据
+        Object obj = ois.readObject();
+        String str = (String)obj;
+
+        System.out.println(str);
+    } catch (ClassNotFoundException | IOException e) {
+        e.printStackTrace();
+    } finally {
+        //关闭流
+        if (ois != null) {
+            try {
+                ois.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+要想一个java类是可序列化的，需要满足相应的要求。
+
+```java
+/* 一个自定义的类，需要满足如下的要求：
+1. 实现接口 SSerializable 这是一个标识接口，表示这个类是可序列化的
+2. 当前类提供一个全局常量
+ */
+class Person implements Serializable{
+
+    public static final long serialVersionUID = 7090187559208313972L;
+
+    private int age;
+    private String name;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Person(int age, String name) {
+        this.age = age;
+        this.name = name;
+    }
+}
+```
+
+### serialVersionUID的理解
+
+> public static final long serialVersionUID
+
+1. **serialVersionUID**来表示类不同版本间的兼容性，简言之，其目的是以序列化对象进行版本控制，有关版本反序列化时是否兼容。
+2. 如果类没有显式定义这个静态变量，它的值式Java运行时环境根据类的内部细节自动生成的，**若类的实例变量做了修改，serialVersionUID可能发生变化**，因此建议显式声明
+
+> Java API中的相关描述
+>
+> 如果可序列化的类未明确声明serialVersionUID，则序列化运行时将根据该类的各个方面为该类计算默认的serialVersionUID值，如Java™对象序列化规范中所述。但是，强烈建议所有可序列化的类显式声明serialVersionUID值，因为默认的serialVersionUID计算对类详细信息高度敏感，而类详细信息可能会根据编译器的实现而有所不同，因此可能在反序列化期间导致意外的`InvalidClassException`。因此，为了保证不同Java编译器实现之间的serialVersionUID值一致，可序列化的类必须声明一个显式的serialVersionUID值。还强烈建议显式serialVersionUID声明在可能的情况下使用private修饰符，因为此类声明仅适用于立即声明的类-serialVersionUID字段作为继承成员不起作用。数组类无法声明显式的serialVersionUID，因此它们始终具有默认的计算值，但是对于数组类，无需匹配serialVersionUID值。
+
+## 随机存储文件流
+
++ **RandomAccessFile**的使用
+  + **RandomAccessFile**直接继承于java.lang.Object类，实现了DataInput和DataOutput接口。
+  + **RandomAccessFile**既可以作为输入流，也可以作为出输出流。
+  + 创建RandomAccessFile需要指定一个**mode**参数：
+    + r：只读方式打开
+    + rw：打开以便读取写入
+    + rwd：打开以便读取写入，同步文件内容的更新
+    + rws：打开以便读取写入，同步文件内容和元数据的更新
+  + **RandomAccessFile**作为输出流时，如果文件不存在，则会自动创建文件
+
+#### RandomAccessFile对文件的复制
+
+```java
+//RandomAccessFile对文件的复制
+public void test1() {
+
+    RandomAccessFile raf1 = null;
+    RandomAccessFile raf2 = null;
+    try {
+        raf1 = new RandomAccessFile(new File("IOTest/pic1.png"), "r");
+        raf2 = new RandomAccessFile(new File("IOTest/pic_1.png"), "rw");
+
+        byte[] buffer = new byte[1024];
+        int len;
+        while((len = raf1.read(buffer)) != -1){
+            raf2.write(buffer, 0, len);
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        if (raf1 != null) {
+            try {
+                raf1.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (raf2 != null) {
+            try {
+                raf2.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+#### RandomAccessFile对文件内容的覆盖
+
+```java
+//RandomAccessFile对文件内容的覆盖
+public void test2() {
+    RandomAccessFile raf = null;
+    try {
+        raf = new RandomAccessFile(new File("IOTest/hello.txt"), "rw");
+        raf.write("xyz".getBytes());
+    } catch (IOException e) {
+        e.printStackTrace();
+    }finally {
+        if (raf != null) {
+            try {
+                raf.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+@Test
+//文件内容的覆盖--精确覆盖
+public void test3() {
+    RandomAccessFile raf = null;
+    try {
+        raf = new RandomAccessFile(new File("IOTest/hello.txt"), "rw");
+
+        raf.seek(3);//将指针调到3的位置（第四个字符）开始覆盖
+        raf.write("xyz".getBytes());
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }finally {
+        if (raf != null) {
+            try {
+                raf.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+#### 使用RandomAccessFile实现数据的插入效果
+
+```java
+//使用RandomAccessFile实现数据的插入效果
+public void test4() {
+    RandomAccessFile raf1 = null;
+    try {
+        raf1 = new RandomAccessFile(new File("IOTest/hello.txt"), "rw");
+
+        raf1.seek(3);
+        //将3后面的内容保存到builder中
+        StringBuilder builder = new StringBuilder((int)new File("IOTest/hello.txt").length());
+        byte[] buffer = new byte[20];
+        int len;
+        while ((len = raf1.read(buffer)) != -1){
+            builder.append(new String(buffer, 0, len));
+        }
+
+        //调回指针，写入“xyz”
+        raf1.seek(3);
+        raf1.write("xyz".getBytes());
+
+        //将StringBuilder中的字符串写入
+        raf1.write(builder.toString().getBytes());
+
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        if (raf1 != null) {
+            try {
+                raf1.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+# NIO
+
++ Java NIO (New l0, Non-Blocking 10)是从Java 1.4版本开始引入的一套新的IO API，可以替代标准的Java IO API。NIO与原来的IO有同样的作用和目的，但是使用的方式完全不同，NIO 支持而向缓冲区的(I0是而向流的)、基于通道的IO操作。**NIO将以更加高效的方式进行文件的读写操作**。
++ Java API中提供了两套NIO,一套是针对**标准输入输出NIO**，另一套就是**网络编程NIO**。
++ java.nio.channels.Channel
+  + **FileChannel**：处理本地文件
+  + **SocketChannel**：TCP网络编程的客户端的Channel
+  + **ServerSocketChannel**：TCP网络编程的服务器端的Channel
+  + **DatagramChannel**：UDP网络编程中发送端和接收端的Channel
+
+## Path、Paths 和 Files 核心API
+
++ 早期的Java只提供了一个File类来访问文件系统，但File类的功能 比较有限，所提供的方法性能也不高。而且，**大多数方法在出错时仅返回失败，并不会提供异常信息**。
+
++ NIO.2为了弥补这种不足，引入了Path接口，代表一个平台无关的平台路径，描述了目录结构中文件的位置。**Path可以看成是File类的升级版本，实际引用的资源也可以不存在**。
+
++ 在以前IO操作都是这样写的:
+
+  ```java
+  import java.io.File;
+  File file = new Fil("index.html");
+  ```
+
++ 但在Java7 中，我们可以这样写:
+
+  ```java
+  import java.ni.file.Path;
+  import java.nio.file.Paths;
+  Path path = Paths.get("index.html");
+  ```
+
++ 同时，**NIO.2**在**java.nio.file**包下还提供了**Files**、**Paths** 工具类，**Files**包含了大量静态的工具方法来操作文件；**Paths**则包含了两个返回Path的静态工厂方法。
++ **Paths**类提供的静态**get()**方法用来获取**Path**对象:
+  + **static Path get(String first, String ... more)**:用于将多个字符串串连成路径
+  + **static Path get(URI ur)**:返回指定uri对应的Path路径
+
+## Files类
+
++ java.nio.file.Files 用于操作文件或目录的工具类
++ Files常用方法
+  + Path copy(Path src, Path dest, CopyOption ... how)
+  + Path creatDirectory(Path path, FileAttribute<?> ... attr)
+  + Path creatFile(Path path, FileAttribute<?> ... attr)
+  + void delete(Path path)
+  + void deleteExists(Path path)
+  + Path move(Path src, Path dest, CopyOption ... how)
+  + long size(Path path)
+
