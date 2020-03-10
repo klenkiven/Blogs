@@ -1,17 +1,19 @@
 # 这个是我的博客的Markdown文件库
  ## 一、目录结构
 
-Java-Blog/
+Java-SeniorFeature/
 
-+ AcccessControl.md
-+ CreatThread.md
-+ EnumAndAnnotation.md
-+ MemberVarInit.md
-+ Method.md
-+ ReusingClass.md
-+ this_KeyWord.md
-+ FileClassUse.md
-+ IOStreamOverview.md
++ AcccessControl.md             ----访问权限控制
++ CreatThread.md                  ----java笔记 --- 创建多线程的方式
++ EnumAndAnnotation.md   ----Java笔记---枚举类和注解
++ MemberVarInit.md              ----成员初始化
++ Method.md                           ---- JAVA的方法
++ ReusingClass.md                  ----复用类
++ this_KeyWord.md                 ----this关键字
++ FileClassUse.md                   ----Java笔记---File类的使用
++ IOStreamOverview.md        ----Java笔记---IO流
++ NetProgram.md                    ----Java笔记--网络编程
++ Reflection.md                        ----Java笔记--反射
 
 LCENSE
 README.md
