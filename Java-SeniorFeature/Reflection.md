@@ -528,6 +528,120 @@ public void test7() {
 
 ## 调用运行时类的完整结构
 
+### 调用运行时类中指定的属性
+
+1. 获取Class类
+2. 获取指定的属性
+3. 修改指定的属性
+
+```java
+@Test
+public void testField() throws Exception {
+    Class<?> clazz = Animal.class;
+
+    //创建运行时类的对象
+    Animal a = (Animal)clazz.newInstance();
+
+    //getField(), getDeclaredField():  获取指定的属性
+
+    //getField(): 只能获取public访问权限的属性
+    Field id = clazz.getField("id");
+    //设置当前属性的值
+    //set():  参数1：指明设置那个对象的属性值  参数2：将此对象设置为多少
+    id.set(a, 1001);
+    //获取当前属性的值
+    //get():  参数：获取的是那个对象的属性值
+    int aid = (int)id.get(a);
+    System.out.println(aid);
+}
+```
+
+> 上面的这种方法已经是过时或者是用处比较小的方法，一般的话使用下面的`getDeclaredField()`方法
+
+```java
+@Test
+public void testField1() throws Exception {
+    Class<Animal> clazz = Animal.class;
+
+    Animal a = clazz.newInstance();
+
+    //getDeclaredField():  获取运行时类的已经声明过的属性
+    //PS. 这里的name是Animal类中的私有属性
+    Field declaredField = clazz.getDeclaredField("name");
+
+    //setAccessible(true):  保证当前属性是可访问的
+    declaredField.setAccessible(true); //只要加上这一句，内裤都给你扒出来
+    //只有这一句不行，会抛出一个异常 IllegalAccessException 得结合上一句使用
+    declaredField.set(a, "Dog");
+
+    //获取对象中的值
+    String name = (String)declaredField.get(a);
+    System.out.println(name);
+
+}
+```
+
+### 调用运行时类中指定的方法
+
+1. 获取指定的方法
+2. 保证方法一定是可访问的 `setAccessable(true)`
+3. 调用方法的 `invoke()`
+4. `invoke()` 方法会返回一个`Object的返回值`，但是可以强转为原方法对应的返回值类型
+
+```java
+@Test
+public void testMethod() throws Exception {
+    Class<Animal> clazz = Animal.class;
+
+    Animal animal = clazz.newInstance();
+
+    //获取指定的方法
+    //参数1：指明获取的方法的方法名
+    //参数2：指明获取方法的形参列表
+    Method show = clazz.getDeclaredMethod("show", String.class);
+    //保证方法一定是可访问的
+    show.setAccessible(true);
+    /*
+     * 调用方法的invoke():
+     * 参数1：殖民方法的调用者，一个实例
+     * 参数2，3，4...：方法的形参列表
+     */
+    show.invoke(animal, "犬类");
+    //invoke():  方法会返回一个Object的返回值，但是可以强转为原方法对应的类型
+    String breed = (String)show.invoke(animal, "犬类");
+    System.out.println(breed);
+
+    //调用私有的静态方法
+    Method showDesc = clazz.getDeclaredMethod("showDesc");
+    showDesc.setAccessible(true);
+    //如果调用的运行时类的方法没有返回值，此invoke()返回null
+    Object returnVal1 = showDesc.invoke(animal);
+    //由于是静态方法，在加载类的时候就已经加载到方法区里面了，因此这里就知道是Animal的静态方法
+    Object returnVal2 = showDesc.invoke(null);
+    System.out.println(returnVal1);
+    System.out.println(returnVal2);
+}
+```
+
+### 调用运行时类中的指定构造器
+
+```java
+@Test
+public void testConstructor() throws Exception {
+    Class<Animal> clazz = Animal.class;
+    //private Animal(String)
+    //1. 获取构造器
+    //参数：指明构造器的参数列表
+    Constructor<Animal> declaredConstructor = clazz.getDeclaredConstructor(String.class);
+    //2. 保证构造器是可访问的
+    declaredConstructor.setAccessible(true);
+    //3. 调用此构造器
+    Animal dog = declaredConstructor.newInstance("Dog");
+
+    System.out.println(dog);
+}
+```
+
 
 
 
