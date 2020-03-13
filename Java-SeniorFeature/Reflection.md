@@ -642,11 +642,177 @@ public void testConstructor() throws Exception {
 }
 ```
 
+## 附录：测试中使用到的类
+
+### Person.java
+
+```java
+public class Person {
+
+    private String name;
+    public int age;
 
 
+    //Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    private Person(String name) {
+        this.name = name;
+    }
+    public Person() {
+        System.out.println("Person()");
+    }
 
 
-## 反射的应用：动态代理
+    //Special Method
+    public void show() {
+        System.out.println("我是一个人");
+    }
+    private String showNation(String nation) {
+        System.out.println("我是一个" + nation + "人");
+        return nation;
+    }
 
 
+    //Setters, Getters
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+```
+
+### Animal一系列的类
+
++ Creature.java
+  + Animal.java
++ MyAnnotation.java
++ MyInterface.java
+
+#### Animal.java
+
+```java
+@MyAnnotation
+public class Animal extends Creature<String> implements Comparable<String>, MyInterface{
+
+    private String name;
+    int age;
+    public int id;
+
+
+    //Constructor
+    public Animal() {}
+
+    @MyAnnotation(value = "abc")
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+
+    //Methods
+    @MyAnnotation
+    private String show(String breed) {
+        System.out.println("动物品种是" + breed);
+        return breed;
+    }
+
+    public String display(String sample) throws NullPointerException, ClassNotFoundException {
+        return sample;
+    }
+
+    private static void showDesc() {
+        System.out.println("我是一只可爱的动物");
+    }
+
+    //Implement Methods
+    @Override
+    public int compareTo(String o) {
+        return 0;
+    }
+
+    @Override
+    public void info() {
+        System.out.println("这是一只动物");
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", id=" + id +
+                '}';
+    }
+}
+```
+
+#### Creature.java
+
+```java
+import java.io.Serializable;
+
+public class Creature<T> implements Serializable {
+    private char gender;
+    public double weight;
+
+    private void breath() {
+        System.out.println("生物呼吸");
+    }
+
+    private void eat() {
+        System.out.println("生物吃东西");
+    }
+}
+```
+
+#### MyAnnotaion.java
+
+```java
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.LOCAL_VARIABLE;
+
+@Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE})
+@Retention(RetentionPolicy.RUNTIME)  //如果RUNTIME换成CLASS就不可以在反射中获取了
+public @interface MyAnnotation {
+    String value() default "hello";
+}
+```
+
+#### MyInterface.java
+
+```java
+public interface MyInterface {
+    void info();
+}
+```
