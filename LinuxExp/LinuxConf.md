@@ -27,7 +27,7 @@
 
    + 这里是禁止特定的网卡的IPV6的配置，比如禁止 lo, wlp0s20f3 网卡的IPV6功能 ( 推荐 )
 
-   		``` 
+   	``` 
    	net.ipv6.conf.lo.disable_ipv6 = 1
    	net.ipv6.conf.wlp0s20f3.disable_ipv6 = 1
    	```
