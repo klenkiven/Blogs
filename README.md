@@ -28,6 +28,11 @@ Web/
 
 MySQL/
 
+LinuxExp/
+
++ ManjaroLInux.md                  ----Manjaro的一些安装记录
++ LinuxConf.md                         ----Linux的一些配置防止自己忘记了
+
 LCENSE
 README.md
 

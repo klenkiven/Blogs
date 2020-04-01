@@ -8,6 +8,10 @@
 
 **不建议没有任何备份之前在实体机上安装！！！**
 
+> Linux也是可以安装Steam的，希望玩游戏的小伙伴有福了！
+>
+> Archlinux Wiki是一个宝藏，Linux很多问题，很多软件的介绍里面都有，学习Linux的小伙伴可以参考一下
+
 ## Manjaro概述
 
 Manjaro是Archlinux的一个衍生版，Archliunx的高度可定制性，颇受linux吧大佬的喜爱。Manjaro继承了Archlinux的所有优点，还免去了Archlinux的安装繁琐的弊端。
