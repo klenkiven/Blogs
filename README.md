@@ -34,7 +34,9 @@ Web/	                   ===JavaWEB的学习笔记
 
 + JavaScript.md                         ----JavaScript的学习笔记
 
-MySQL/                  ===MySQL的学习  MySQL 5
+MySQL/                  ===MySQL的学习  MySQL 8
+
++ Installation.md                       ----MySQL 8的安装
 
 LinuxExp/              ===Linux使用经验
 
