@@ -1,7 +1,7 @@
 # 这个是我的博客的Markdown文件库
  ## 一、目录结构
 
-Java-SeniorFeature/
+Java-SeniorFeature/      ===Java的高级特性学习
 
 + AcccessControl.md             ----访问权限控制
 + CreatThread.md                  ----java笔记 --- 创建多线程的方式      *尚未整理*
@@ -15,20 +15,28 @@ Java-SeniorFeature/
 + NetProgram.md                    ----Java笔记--网络编程
 + Reflection.md                        ----Java笔记--反射
 
-UsefulExp/
+UsefulExp/                ===实用的一些经验
 
 + TyporaPlusGithub.md          ----Typora + Github 作为笔记本和图床
 + MvnCentralRepoProblem.md   ----Mven中央仓库repo.maven.apache.org/maven2的错误问题
 
-Web/
+WebChat/               ===Java网络聊天室
+
++ WebChat-1.md                       ----网络聊天室小程序的一些记录
+
+Web/	                   ===JavaWEB的学习笔记 
 
 + WebOverview.md                  ----Web技术的概述
+
 + HTML.md                                ----HTML的笔记
+
 + CSS.md                                    ----CSS的笔记
 
-MySQL/
++ JavaScript.md                         ----JavaScript的学习笔记
 
-LinuxExp/
+MySQL/                  ===MySQL的学习  MySQL 5
+
+LinuxExp/              ===Linux使用经验
 
 + ManjaroLInux.md                  ----Manjaro的一些安装记录
 + LinuxConf.md                         ----Linux的一些配置防止自己忘记了
