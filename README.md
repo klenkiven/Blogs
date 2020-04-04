@@ -37,7 +37,10 @@ Web/	                   ===JavaWEB的学习笔记
 MySQL/                  ===MySQL的学习  MySQL 8
 
 + Installation.md                       ----MySQL 8的安装
-+ SQL.md                                    ----SQL语法的学习
++ SQL_OVERVIEW.md               ----SQL语法概述
++ SQL_DQL.md                          ----SQL的DQL查询语言的学习
++ SQL_DML.md                          ----SQL的DML操作语言的学习
++ SQL_DDL.md                           ----SQL的DDL定义语言的学习
 
 LinuxExp/              ===Linux使用经验
 
