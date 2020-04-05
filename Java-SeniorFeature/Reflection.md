@@ -642,6 +642,181 @@ public void testConstructor() throws Exception {
 }
 ```
 
+## 动态代理
+
+### 代理设计模式的原理
+
+使用一个代理将对象包装起来，然后用该代理对象。任何对原是对翔的调用都要通过代理。代理对象决定是否以及何时将方法，调用转到原始对象上。**最好可以通过一个代理类完成全部的代理功能。**
+
+### 动态代理使用场合：
+
++ 调试
++ 远程方法调用
+
+### 动态代理相较于静态代理的优势
+
+抽象角色中（接口）声明的所有方法都被转移到调用处理器一个集中的方法中处理，这样，我们可以更加灵活统一的处理众多的方法。
+
+### 静态代理举例
+
+```java
+/**
+ * 静态代理
+ */
+interface ClothFactory {
+    void produceCloth();
+}
+
+//代理类
+class ProxyClothFactory implements ClothFactory{
+    private ClothFactory factory;
+
+    public ProxyClothFactory(ClothFactory factory){
+        this.factory = factory;
+    }
+
+    @Override
+    public void produceCloth() {
+        System.out.println("做一些准备工作");
+
+        factory.produceCloth();
+
+        System.out.println("代理工厂做一些后续的收尾工作");
+    }
+}
+
+class NickClothFactory implements ClothFactory {
+
+    @Override
+    public void produceCloth() {
+        System.out.println("Nick生产一些运动服");
+    }
+}
+
+public class StaticProxyTest {
+    public static void main(String[] args) {
+        //创建代理类的对象
+        NickClothFactory nickClothFactory = new NickClothFactory();
+        //创建被代理类的对象
+        ProxyClothFactory proxyClothFactory = new ProxyClothFactory(nickClothFactory);
+
+        proxyClothFactory.produceCloth();
+    }
+}
+```
+
+#### 静态代理特点
+
+代理类和被代理类，在编译期间就被定下来了
+
+### 动态代理举例
+
+#### 实现动态代理，需要解决的问题
+
+1. 如何体现加载到内存中的被带李磊，动态的创建一个代理类及其对象
+2. 当通过代理类对象调用方法时，如何动态的调用被代理类中的同名方法
+
+```java
+package xyz.klenkiven.reflection;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+/**
+ * 动态代理举例
+ */
+
+interface Humanity {
+    String getBelief();
+    void eat(String food);
+}
+
+//被代理类
+class SuperMan implements Humanity {
+
+    @Override
+    public String getBelief() {
+        return "我要拯救人类";
+    }
+
+    @Override
+    public void eat(String food) {
+        System.out.println("我吃了" + food);
+    }
+}
+
+class ProxyFactory {
+
+    //调用方法，返回一个代理累得对象，解决跟据加载到内存中的代理类，动态的创建代理类及其对象
+    public static Object getProxyInstance(Object obj) {//obj是被代理类的对象
+
+        MyInvocationHandler myInvocationHandler = new MyInvocationHandler();
+        myInvocationHandler.bind(obj);
+        Object returnObj = Proxy.newProxyInstance(obj.getClass().getClassLoader(),
+                obj.getClass().getInterfaces(),
+                myInvocationHandler);
+
+        return returnObj;
+    }
+}
+
+class MyInvocationHandler implements InvocationHandler {
+
+    private Object obj;  //赋值时需要用被代理类的对象
+
+    public void bind(Object obj) {
+        this.obj = obj;
+    }
+
+    //当我们通过代理类的对象，调用方法a是，就会自动调用如下方法：invoke()
+    //将被代理类要执行方法a的功能生命在invoke()中
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+        HumanityUtil util = new HumanityUtil();
+        util.method1();
+
+        //method即为代理类的对象调用方法
+        //obj:被代理类的对象
+        Object returnValue = method.invoke(obj, args);
+
+        util.method2();
+
+        //上述方法返回值作为当前类中的invoke()的返回值
+        return returnValue;
+    }
+}
+
+class HumanityUtil {
+
+    public void method1() {
+        System.out.println("=========通用方法1=======");
+    }
+
+    public void method2() {
+        System.out.println("=========通用方法2=======");
+    }
+}
+
+public class ProxyTest {
+    public static void main(String[] args) {
+
+        SuperMan superMan = new SuperMan();
+        //proxyInstance: 代理类的对象
+        Humanity proxyInstance = (Humanity) ProxyFactory.getProxyInstance(superMan);
+        System.out.println(proxyInstance.getBelief());
+        proxyInstance.eat("四川麻辣烫");
+
+        System.out.println("****************************");
+
+        NickClothFactory nickClothFactory = new NickClothFactory();
+        ClothFactory proxyClothFactory = (ClothFactory) ProxyFactory.getProxyInstance(nickClothFactory);
+        proxyClothFactory.produceCloth();
+    }
+}
+```
+
 ## 附录：测试中使用到的类
 
 ### Person.java
