@@ -54,13 +54,34 @@ LiveCD启动时，一般都有一些选项，应该选择正确的语言  lang =
 
 ## 安装好以后的配置
 
+### 配置镜像源
+
+执行命令`sudo pacman-mirrors --country China`，会自动选出最快的中国的镜像源。
+
+执行命令`sudo pacman-mirrors --interactive --default`这个可以有一个图形化的窗口，你可以选择来自中国的镜像源。（我一般选择的是清华大学的镜像源，速度很可以--山西，联通）
+
+### 配置archlinuxcn源
+
+1. 编辑文件`/etc/pacman.conf`
+
+   ```bash
+   sudo vim /etc/pacman.conf
+   ```
+
+2. 在文件末尾加上
+
+   ```
+   [archlinuxcn]
+   Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+   ```
+
+   > 我还是选的清华大学的镜像是真的快！
+
 ### 输入法配置
 
-一般来说，linux安装好以后是没有中文输入法的。
+一般来说，linux安装好以后是没有中文输入法的。gnome和KDE都可以使用这种方法配置中文输入法。
 
 + [Archlinux+gnome安装中文输入法](https://www.cnblogs.com/huangyingting/p/10599404.html)
-  + 配置archlinuxcn源
-  + 安装输入法本体
 
 ### gnome桌面配置神器 -- gnome-tweaks
 
