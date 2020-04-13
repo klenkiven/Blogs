@@ -48,7 +48,7 @@
 
 在Manjaro下面deepin的QQ和TIM无法打开相关设置，我这里就不再过多探究这个问题了。
 
-## Deepin QQ和TIM无法在KDE桌面启动的问题
+## KDE：Deepin QQ和TIM无法在KDE桌面启动的问题
 
 1. 安装`gnome-setting-daemon`
 
@@ -74,4 +74,10 @@
    gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
    ```
 
-   > 我这里设置的是1.25，你也可以设置成更大或者更小的数，数字越大，放大倍数越大
+   > 我这里设置的是1.25，你也可以设置成更大或者更小的数，数字越大，放大倍数越大mari
+
+## KDE：MySQL Workbench在archlinux中出现The name org.freedesktop.secrets was not provided by any .service files
+
+MySQL Workbench在archlinux中出现 Could not store password: The name org.freedesktop.secrets was not provided by any .service files的错误
+
+解决方案是安装 gnome-keyring 包。
