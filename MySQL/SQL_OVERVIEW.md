@@ -138,164 +138,108 @@ insert  into `locations`(`location_id`,`street_address`,`postal_code`,`city`,`st
 
 ```
 
-## DDL：操作数据库、表
+## 创建一个girls的数据库，方便后续的学习
 
-### 操作数据库：CRUD
+```sql
+/*
+SQLyog Ultimate v10.00 Beta1
+MySQL - 5.7.18-log : Database - girls
+*********************************************************************
+*/
 
-+ C（Create）：创建
 
-  + 创建数据库：
+/*!40101 SET NAMES utf8 */;
 
-    ```sql
-    create database 数据库名称;
-    ```
+/*!40101 SET SQL_MODE=''*/;
 
-  + 创建数据库，判断不存在，在创建：
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`girls` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-    ```sql
-    create database if not exists 数据库名称;
-    ```
+USE `girls`;
 
-  + 创建数据库，并设定字符集：
+/*Table structure for table `admin` */
 
-    ```sql
-    create database 数据库名称 character set 字符集名;
-    ```
-    
-  + 创建db4数据库，判断是否存在，并指定字符集为GBK：
+DROP TABLE IF EXISTS `admin`;
 
-    ```SQL
-    create database if not exists db4 character set gbk;
-    ```
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(10) NOT NULL,
+  `password` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-+ R（Retrieve）：查询
+/*Data for the table `admin` */
 
-  + 查询所有数据库的名称：
+insert  into `admin`(`id`,`username`,`password`) values (1,'john','8888'),(2,'lyt','6666');
 
-    ```sql
-    show databases;
-    ```
+/*Table structure for table `beauty` */
 
-  + 查询某个数据库的字符集：查询某个数据库的创建语句
+DROP TABLE IF EXISTS `beauty`;
 
-    ```sql
-    show create database mysql;
-    ```
-    
-    ```
-    +----------+---------------------------------------------------------------------------------------------------------------------------------+
-    | Database | Create Database                                                                                                                 |
-    +----------+---------------------------------------------------------------------------------------------------------------------------------+
-    | mysql    | CREATE DATABASE `mysql` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */ |
-    +----------+---------------------------------------------------------------------------------------------------------------------------------+
-    1 row in set (0.00 sec)
-    ```
-    
-    **注意！**这里是utf8mb4，MySQL在5.5.3之后增加了这个utf8mb4的编码，mb4就是most bytes 4的意思，专门用来兼容四字节的unicode。utf8mb4是utf8的超集，除了将编码改为utf8mb4外不需要做其他转换。
+CREATE TABLE `beauty` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `sex` char(1) DEFAULT '女',
+  `borndate` datetime DEFAULT '1987-01-01 00:00:00',
+  `phone` varchar(11) NOT NULL,
+  `photo` blob,
+  `boyfriend_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
-+ U（Update）：修改
+/*Data for the table `beauty` */
 
-  + 修改数据库的字符集
+insert  into `beauty`(`id`,`name`,`sex`,`borndate`,`phone`,`photo`,`boyfriend_id`) values (1,'柳岩','女','1988-02-03 00:00:00','18209876577',NULL,8),(2,'苍老师','女','1987-12-30 00:00:00','18219876577',NULL,9),(3,'Angelababy','女','1989-02-03 00:00:00','18209876567',NULL,3),(4,'热巴','女','1993-02-03 00:00:00','18209876579',NULL,2),(5,'周冬雨','女','1992-02-03 00:00:00','18209179577',NULL,9),(6,'周芷若','女','1988-02-03 00:00:00','18209876577',NULL,1),(7,'岳灵珊','女','1987-12-30 00:00:00','18219876577',NULL,9),(8,'小昭','女','1989-02-03 00:00:00','18209876567',NULL,1),(9,'双儿','女','1993-02-03 00:00:00','18209876579',NULL,9),(10,'王语嫣','女','1992-02-03 00:00:00','18209179577',NULL,4),(11,'夏雪','女','1993-02-03 00:00:00','18209876579',NULL,9),(12,'赵敏','女','1992-02-03 00:00:00','18209179577',NULL,1);
 
-    ```sql
-    alter database 数据库名称 character set 字符集名称;
-    ```
+/*Table structure for table `boys` */
 
-+ D（Delete）：删除
+DROP TABLE IF EXISTS `boys`;
 
-  + 删除数据库
+CREATE TABLE `boys` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `boyName` varchar(20) DEFAULT NULL,
+  `userCP` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-    ```sql
-    drop database 数据库名称;
-    ```
+/*Data for the table `boys` */
 
-  + 判断数据库存在，再删除
+insert  into `boys`(`id`,`boyName`,`userCP`) values (1,'张无忌',100),(2,'鹿晗',800),(3,'黄晓明',50),(4,'段誉',300);
 
-    ```sql
-    drop database if exists 数据库名称;
-    ```
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+```
 
-+ 使用数据库
+## 创建一个job_grades的表，方便后续的学习
 
-  + 查询当前正在使用的数据库名称
+```sql
+# 这个表要生成在myemployees数据库里面
+CREATE TABLE job_grades
+(grade_level VARCHAR(3),
+ lowest_sal  int,
+ highest_sal int);
 
-    ```sql
-    select database();
-    ```
+INSERT INTO job_grades
+VALUES ('A', 1000, 2999);
 
-  + 使用数据库
+INSERT INTO job_grades
+VALUES ('B', 3000, 5999);
 
-    ```sql
-    use 数据库名称;
-    ```
+INSERT INTO job_grades
+VALUES('C', 6000, 9999);
 
-### 操作表：CURD
+INSERT INTO job_grades
+VALUES('D', 10000, 14999);
 
-+ C（Create）：创建
+INSERT INTO job_grades
+VALUES('E', 15000, 24999);
 
-  + 语法：
-
-    ```sql
-    creat table 表名(
-    	列名1 数据类型1,
-        列名2 数据类型2,
-        ...
-        列名n 数据类型n
-    );
-    ```
-
-    **注意！**最后一列，不用添加逗号
-
-  + 数据类型：
-
-    1. int：整数类型
-
-    2. double：小数类型
-
-       `score double(5, 2)`这个数一共有5位，并且最少有2位小数。
-
-    3. date：日期类型，只包含年月日类型，yyyy-MM-dd
-
-    4. datetime：日期，包含年月日时分秒，yyyy-MM-dd HH:mm:ss
-
-    5. timestamp：时间戳类型 包含年月日十分秒，yyyy-MM-dd HH:mm:ss
-
-       + 如果将来不给这个字段赋值，或赋值为null，则默认使用当前的系统时间来赋值。
-
-    6. varchar：字符串
-
-       `name varchar(20)`指定最大的字符串长度
-
-  + 练习：创建一个表
-
-    ```sql
-    create table student(
-    	id int,
-        name varchar(32),
-        age int,
-        score double(4,1),
-        birthday date,
-        insert_time timestamp
-    );
-    ```
-
-    
-
-+ R（Retrieve）：查询
-
-  + 查询某个数据库中所有的表名称：
-
-    ```sql
-    show tables;
-    ```
-
-  + 查询表结构
-
-    ```sql
-    desc 表名;
-    ```
-
-+ U（Update）：修改
-
-+ D（Delete）：删除
+INSERT INTO job_grades
+VALUES('F', 25000, 40000);
+```
 
