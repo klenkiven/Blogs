@@ -30,7 +30,17 @@ SQL（Structured Query Language）结构化查询语言
 
 用来定义数据库对象：数据库，表，列表等等。关键字：create，drop，alter等等。
 
-## 创建一个employees的数据库，方便后续的学习
+## 一些学习资源整理
+
+### MYSQL的安全模式：sql_safe_updates介绍
+
+> https://www.jianshu.com/p/401c3cb722f6
+
+### 一图看懂join、left join、right join、fulljoin间的区别
+
+> https://www.cnblogs.com/rickons/p/9663039.html
+
+## 附录1：创建一个employees的数据库，方便后续的学习
 
 ```sql
 /*
@@ -138,7 +148,7 @@ insert  into `locations`(`location_id`,`street_address`,`postal_code`,`city`,`st
 
 ```
 
-## 创建一个girls的数据库，方便后续的学习
+## 附录2：创建一个girls的数据库，方便后续的学习
 
 ```sql
 /*
@@ -215,7 +225,7 @@ insert  into `boys`(`id`,`boyName`,`userCP`) values (1,'张无忌',100),(2,'鹿�
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 ```
 
-## 创建一个job_grades的表，方便后续的学习
+## 附录3：创建一个job_grades的表，方便后续的学习
 
 ```sql
 # 这个表要生成在myemployees数据库里面

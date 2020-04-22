@@ -191,3 +191,19 @@ MySQL Workbench在archlinux中出现 Could not store password: The name org.free
 **参考源：**
 
 https://dev.mysql.com/doc/refman/8.0/en/installing.html
+
+### manjaro17.10 配置mariadb 数据库
+
+> 一片不错的教程，但是仍然很有意义！
+
+https://www.jianshu.com/p/bbf2551463fa
+
+
+
+
+
+ip link set wlo1 up 
+
+wpa_supplicant -i wlo1 -c /etc/wpa_supplicant/wpa_supplicant.conf & 
+
+dhcpd
