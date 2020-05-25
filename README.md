@@ -16,6 +16,9 @@ Java/                               	    ===Java的笔记文件
   + NetProgram.md                    ----Java笔记--网络编程
   + Reflection.md                        ----Java笔记--反射
 + JDBC/                               ===JDBC的学习
++ JVM/                                 ===JVM的学习笔记
+  + Overview.md                         ----JVM笔记的概述部分
+  + AMMM-MemoryArea-OOM.md ----Java内存区域与内存溢出异常
 
 UsefulExp/                ===实用的一些经验
 
