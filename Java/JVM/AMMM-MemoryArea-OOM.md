@@ -8,7 +8,7 @@ Java虚拟机在执行程序过程中，会把它管理的内存划分成若干�
 
 ## 内存区域（Memeory Area）
 
-![image-20200525130919709](D:\KlenKiven\Blogs\Blogs\img\AMMM-MemeoryArea-OOM-1.png)
+![image-20200525130919709](https://gitee.com/klenkiven/Blogs/raw/master/img/AMMM-MemeoryArea-OOM-1.png)
 
 > 如图，上面的灰色区域是**线程共享**的内存区域，白色区域是**线程私有**的内存区域。
 >
@@ -32,7 +32,7 @@ Java虚拟机在执行程序过程中，会把它管理的内存划分成若干�
 
     计数器值为**空（Undefined）**
 
-### Java虚拟机栈
+### Java虚拟机栈（Java Virtual Machine Stack）
 
 + 线程私有
 + 生命周期与线程相同
@@ -47,3 +47,24 @@ Java虚拟机在执行程序过程中，会把它管理的内存划分成若干�
 [^2]:可能是指向对象起始地址的引用指针，也可能是一个代表对象的句柄或与此对象相关的位置
 [^3]:指向一条字节码指令的地址
 
+如果线程请求的**栈深度**大于虚拟机允许的深度，则抛出**StackOverFlowError异常**。
+
+如果动态扩展时**无法申请到足够的内存**，则抛出**OutOfMemoryError异常**。
+
+### 本地方法栈（Native Method Stack）
+
++ 本地方法栈则为虚拟机是用到的**Native方法**服务
+
++ 和java虚拟机栈发挥的作用十分相似，性质也基本相同
++ 有一些虚拟机比如HotSpot虚拟机直接把本地方法栈和虚拟机栈**合二为一**
++ 抛出异常：**OutOfMemoryError**和**StackOverFlowError**
+
+### Java堆
+
++ 线程共享
+
++ **唯一目的**：存放对象实例
+
+  >  所有的对象实例以及数组要在堆上分配
+
++ Java堆是垃圾收集管理的主要区域，影刺很多时候也称为**GC堆**（**Garbage Collectoin Heap**）
