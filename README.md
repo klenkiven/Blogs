@@ -18,7 +18,7 @@ Java/                               	    ===Java的笔记文件
 + JDBC/                               ===JDBC的学习
 + JVM/                                 ===JVM的学习笔记
   + Overview.md                         ----JVM笔记的概述部分
-  + AMMM-MemoryArea-OOM.md ----Java内存区域与内存溢出异常
+  + AMMM-MemoryArea.md    ----Java内存区域
 
 UsefulExp/                ===实用的一些经验
 
