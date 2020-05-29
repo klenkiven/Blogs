@@ -127,7 +127,7 @@ Java虚拟机在执行程序过程中，会把它管理的内存划分成若干�
 
        > 并发情况下，正在给A分配内存，指针还没来得及修改，对象B又同时使用了原来指针分配内存的情况。
        >
-       > <img src="D:\KlenKiven\Blogs\Blogs\img\AMMM-MemeoryArea-OOM-2.png" alt="image-20200528110316165" style="zoom:67%;" />
+       > <img src="https://gitee.com/klenkiven/Blogs/raw/master/img/AMMM-MemeoryArea-OOM-2.png" alt="image-20200528110316165" style="zoom:67%;" />
 
        解决方案有二：
 
@@ -179,11 +179,11 @@ HotSpot要求对象起始地址必须是8的整数倍。也就是**对象的大�
 
 #### 句柄访问
 
-<img src="D:\KlenKiven\Blogs\Blogs\img\AMMM-MemeoryArea-OOM-3.png" alt="image-20200529130353999" style="zoom:67%;" />
+<img src="https://gitee.com/klenkiven/Blogs/raw/master/img/AMMM-MemeoryArea-OOM-3.png" alt="image-20200529130353999" style="zoom:67%;" />
 
 #### 直接指针访问
 
 > HotSpot虚拟机使用的就是直接指针访问
 
-<img src="D:\KlenKiven\Blogs\Blogs\img\AMMM-MemeoryArea-OOM-4.png" alt="image-20200529130926011" style="zoom:67%;" />
+<img src="https://gitee.com/klenkiven/Blogs/raw/master/img/AMMM-MemeoryArea-OOM-4.png" alt="image-20200529130926011" style="zoom:67%;" />
 
