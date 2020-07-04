@@ -49,8 +49,12 @@ MySQL/                  ===MySQL的学习  MySQL 8
 
 LinuxExp/              ===Linux使用经验
 
-+ ManjaroLInux.md                  ----Manjaro的一些安装记录
++ ManjaroLI nux.md                  ----Manjaro的一些安装记录
 + LinuxConf.md                         ----Linux的一些配置防止自己忘记了
+
+Python/                 ===Python学习的相关笔记
+
++ 01_annotation.md                 ----python的注释
 
 LCENSE
 README.md
