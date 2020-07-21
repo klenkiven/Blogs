@@ -56,6 +56,11 @@ Python/                 ===Python学习的相关笔记
 
 + 01_annotation.md                 ----python的注释
 
+CLRS/
+
++ ShellSort.md                           ----希尔排序
++ InsertSort.md                         ----插入排序
+
 LCENSE
 README.md
 
