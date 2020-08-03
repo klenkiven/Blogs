@@ -46,6 +46,7 @@ MySQL/                  ===MySQL的学习  MySQL 8
 + SQL_DQL.md                          ----SQL的DQL查询语言的学习
 + SQL_DML.md                          ----SQL的DML操作语言的学习
 + SQL_DDL.md                           ----SQL的DDL定义语言的学习
++ DataTypeAndCheck.md        ----SQL的数据类型和常见的约束
 
 LinuxExp/              ===Linux使用经验
 
