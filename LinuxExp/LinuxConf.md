@@ -71,10 +71,10 @@
 4. 如果你是高分屏幕就需要设置dpi
 
    ```bash
-   gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
+   gsettings set org.gnome.desktop.interface text-scaling-factor 1.27
    ```
 
-   > 我这里设置的是1.25，你也可以设置成更大或者更小的数，数字越大，放大倍数越大mari
+   > 我这里设置的是1.27，你也可以设置成更大或者更小的数，数字越大，放大倍数越大mari
 
 ## KDE：MySQL Workbench在archlinux中出现The name org.freedesktop.secrets was not provided by any .service files
 
