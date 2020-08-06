@@ -80,6 +80,7 @@
 
 MySQL Workbench在archlinux中出现 Could not store password: The name org.freedesktop.secrets was not provided by any .service files的错误
 
+<<<<<<< HEAD
 解决方案是安装 gnome-keyring 包。
 
 ## Sogoupinyin: Error parsing key “overrides” in schema “org.gnome.settings-daemon.plugins.xsettings” as specified in override file “/usr/share/glib-2.0/schemas/50_sogoupinyin.gschema.override”: 1:expected value. Ignoring override for this key.
@@ -117,3 +118,6 @@ vim .xprofile
 	export XMODIFIERS="@im=fcitx5
 ```
 
+=======
+解决方案是安装 gnome-keyring 。
+>>>>>>> master
