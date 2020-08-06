@@ -53,7 +53,7 @@
 1. 安装`gnome-setting-daemon`
 
    ```bash
-   sudo pacman -S gnome-setting-deamon
+   sudo pacman -S gnome-settings-deamon
    ```
 
 2. 执行下面的命令
@@ -71,7 +71,7 @@
 4. 如果你是高分屏幕就需要设置dpi
 
    ```bash
-   gsettings set org.gnome.desktop.interface text-scaling-factor 1.27
+   gsettings set org.gnome.desktop.interface text-scaling-factor 1.31
    ```
 
    > 我这里设置的是1.27，你也可以设置成更大或者更小的数，数字越大，放大倍数越大mari
@@ -81,3 +81,39 @@
 MySQL Workbench在archlinux中出现 Could not store password: The name org.freedesktop.secrets was not provided by any .service files的错误
 
 解决方案是安装 gnome-keyring 包。
+
+## Sogoupinyin: Error parsing key “overrides” in schema “org.gnome.settings-daemon.plugins.xsettings” as specified in override file “/usr/share/glib-2.0/schemas/50_sogoupinyin.gschema.override”: 1:expected value. Ignoring override for this key.
+
+```bash
+sudo nano /usr/share/glib-2.0/schemas/50_sogoupinyin.gschema.override
+	# change the line of overrides：
+	overrides=Gtk/IMModule:<fcitx>
+	# change to:
+	overrides=Gtk/IMModule:<fcitx>
+sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+reboot
+```
+
+# Archlinux 安装的一些东西
+
+## Fcitx5 相当不错的一个输入法
+
+```bash
+sudo pacman -S fcitx5-im				# Fcitx5的本体
+sudo pacman -S fcitx5-chinese-addons	# Fcitx5的中文扩展支持
+sudo pacman -S fcitx5-material-color	# Fcitx5的一个主题
+```
+
+完成安装步骤以后，对其进行相关的配置。
+
+```bash
+# 首先要配置的是自动启动
+cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/
+# 接下來配置相关的环境变量配置
+vim .xprofile
+	# 文件添加下面的内容
+	export GTK_IM_MODULE=fcitx5
+	export QT_IM_MODULE=fcitx5
+	export XMODIFIERS="@im=fcitx5
+```
+

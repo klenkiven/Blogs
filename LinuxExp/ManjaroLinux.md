@@ -81,7 +81,8 @@ LiveCD启动时，一般都有一些选项，应该选择正确的语言  lang =
 
 一般来说，linux安装好以后是没有中文输入法的。gnome和KDE都可以使用这种方法配置中文输入法。
 
-+ [Archlinux+gnome安装中文输入法](https://www.cnblogs.com/huangyingting/p/10599404.html)
++ ~~[Archlinux+gnome安装中文输入法](https://www.cnblogs.com/huangyingting/p/10599404.html)~~
++ 
 
 ### gnome桌面配置神器 -- gnome-tweaks
 
