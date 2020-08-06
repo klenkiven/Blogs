@@ -52,6 +52,7 @@ LinuxExp/              ===Linux使用经验
 
 + ManjaroLI nux.md                  ----Manjaro的一些安装记录
 + LinuxConf.md                         ----Linux的一些配置防止自己忘记了
++ GitExp.md                                ----Git的相关学习笔记
 
 Python/                 ===Python学习的相关笔记
 
