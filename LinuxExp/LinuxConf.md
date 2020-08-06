@@ -80,4 +80,4 @@
 
 MySQL Workbench在archlinux中出现 Could not store password: The name org.freedesktop.secrets was not provided by any .service files的错误
 
-解决方案是安装 gnome-keyring 包。
+解决方案是安装 gnome-keyring 。
