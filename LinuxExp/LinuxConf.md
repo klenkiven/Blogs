@@ -97,6 +97,8 @@ reboot
 
 ## Fcitx5 相当不错的一个输入法
 
+### 安装及其配置
+
 ```bash
 sudo pacman -S fcitx5-im				# Fcitx5的本体
 sudo pacman -S fcitx5-chinese-addons	# Fcitx5的中文扩展支持
@@ -115,3 +117,13 @@ vim .xprofile
 	export QT_IM_MODULE=fcitx5
 	export XMODIFIERS="@im=fcitx5
 ```
+
+### 自己遇到的问题：候选框字体设置
+
+KDE桌面（**安装了KCM**）的解决办法：
+
+`设置=>区域设置=>输入法配置=>配置附加组件=>经典用户恶极面=>设置`
+
+非KDE桌面：
+
+右键系统托盘上面的输入法图标，选择`配置`，然后`配置附加组件=>经典用户恶极面=>设置`
