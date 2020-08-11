@@ -56,12 +56,17 @@ LinuxExp/              ===Linux使用经验
 
 Python/                 ===Python学习的相关笔记
 
-+ 01_annotation.md                 ----python的注释
++ Basic.md                 ----python的基础内容
 
 CLRS/
 
 + ShellSort.md                           ----希尔排序
 + InsertSort.md                         ----插入排序
+
+Course/
+
++ discrete-math/
+  + 
 
 LCENSE
 README.md
