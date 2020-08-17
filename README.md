@@ -66,7 +66,12 @@ CLRS/
 Course/
 
 + discrete-math/
-  + 
+  + 基础1-命题逻辑.md
+
+Rust-lang/
+
++ TroubleShooting.md             ----相关的问题的解决
++ 
 
 LCENSE
 README.md
