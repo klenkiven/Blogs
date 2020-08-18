@@ -414,3 +414,60 @@
 </html>
 ```
 
+## DOM模型
+
+> DOM全称是 Document Object Model 文档对象模型
+>
+> 吧文档中的标签，属性，文本转换为对象来管理。                                 
+
+DOM模型，体现在 `document` 对象。Document文档，由一个树状结构保存。 
+
+1. Document管理了所有的HTML对象内容
+2. document他是一种树状结构的文档，有层级关系。
+3. 把所有的标签都对象化
+4. 可以通过document访问所有的标签对象
+
+### Document对象的方法介绍
+
+`document.getElementById(elementId)`
+
++ 通过标签的**ID属性**查找标签dom对象，elementId是标签的ID属性值
+
+`document.getElementByName(elementName)`
+
++ 通过标签的**name属性**查找标签的dom对象，elementName标签的name属性值
+
+`document.getElementByTagName(tagname)`
+
++ 通过**标签名**查找标签dom对象，tagname是标签名
+
+`document.createElement(tagName)`
+
++ 通过给定的**标签名**。**创建一个标签对象**，tagName是要创建的标签名
+
+## 节点的常用属性和方法
+
+> 节点就是标签对象
+
+### 方法
+
++  `getElementByTagName(tagname)` 方法
+
+  通过具体的元素节点调用该方法，可以回去当前节点的制定标签名子节点
+
++ `appendChild(oChildNode)` 方法
+
+  增加一个子节点，oChildNode是要增加的子节点
+
+### 属性
+
++ childNodes：当前节点的所有子节点
++ firstChild
++ lastChild
++ parentNode：当前节点的父节点
++ nextSibling：当前节点的下一个节点
++ previousSibling：当前节点的上一个节点
++ className：获取或设置标签的 class 属性值
++ innerHTML：获取/设置其实标签和恶结束标签中的内容
++ innerText：获取/设置其实标签和恶结束标签中的文本
+
