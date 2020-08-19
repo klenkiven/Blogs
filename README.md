@@ -32,12 +32,10 @@ WebChat/               ===Java网络聊天室
 Web/	                   ===JavaWEB的学习笔记 
 
 + WebOverview.md                  ----Web技术的概述
-
 + HTML.md                                ----HTML的笔记
-
 + CSS.md                                    ----CSS的笔记
-
 + JavaScript.md                         ----JavaScript的学习笔记
++ jQuery.md                              ----jQuery 的学习笔记
 
 MySQL/                  ===MySQL的学习  MySQL 8
 
