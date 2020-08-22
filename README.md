@@ -35,7 +35,9 @@ Web/	                   ===JavaWEB的学习笔记
 + HTML.md                                ----HTML的笔记
 + CSS.md                                    ----CSS的笔记
 + JavaScript.md                         ----JavaScript的学习笔记
-+ jQuery.md                              ----jQuery 的学习笔记
++ jQuery.md                               ----jQuery 的学习笔记
++ vuejs/              === vue.js的相关笔记
+  + 01-vue实例.md                ----Vue的实例介绍
 
 MySQL/                  ===MySQL的学习  MySQL 8
 
