@@ -59,7 +59,7 @@
 2. 执行下面的命令
 
    ```bash
-   cp /etc/xdg/autostart/org.gnome.SettingsDaemon.XSettings.desktop ~/.config/autostart
+   cp /etc/xdg/autostart/org.gnome.SettingsDaemon.XSettings.desktop ~/.config/autostart/ 
    ```
 
 3. 设置KDE开机启动
@@ -109,7 +109,7 @@ sudo pacman -S fcitx5-material-color	# Fcitx5的一个主题
 
 ```bash
 # 首先要配置的是自动启动
-cp /usr/share/applications/fcitx5.desktop ~/.config/autostart/
+cp /usr/share/applications/fcitx5.desktop ~/.config/autostart-scripts/
 # 接下來配置相关的环境变量配置
 vim .xprofile
 	# 文件添加下面的内容
@@ -127,3 +127,26 @@ KDE桌面（**安装了KCM**）的解决办法：
 非KDE桌面：
 
 右键系统托盘上面的输入法图标，选择`配置`，然后`配置附加组件=>经典用户恶极面=>设置`
+
+## GRUB美化
+
+### 下载主题文件
+
+> 登入网站Gnome-Look
+>
+> https://www.gnome-look.org/
+
+找到GRUB Theme标签，就可以找自己喜欢的主题啦！我喜欢的主题是Tela主题。
+
+### 具体安装
+
+```bash
+# 解压文件
+tar -Jxf Tela-1080p.tar.xz
+# 将文件移动到指定位置
+sudo mkdir /usr/share/grub/themes/Tela
+sudo cp -rf ~/Downloads/Tela-1080p/*  /usr/share/grub/themes/Tela
+# 
+
+```
+
