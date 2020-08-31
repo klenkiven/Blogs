@@ -128,7 +128,7 @@ KDE桌面（**安装了KCM**）的解决办法：
 
 右键系统托盘上面的输入法图标，选择`配置`，然后`配置附加组件=>经典用户恶极面=>设置`
 
-## GRUB美化
+# GRUB美化
 
 ### 下载主题文件
 
@@ -150,3 +150,6 @@ sudo cp -rf ~/Downloads/Tela-1080p/*  /usr/share/grub/themes/Tela
 
 ```
 
+# modprobe: FATAL: Module vboxnetflt not found in directory /lib/modules/5.8.5-arch1-1
+
+安装 `linux-header` , 然后执行  `sudo modprobe vboxdrv vboxnetflt vboxnetadp vboxpci ` 
