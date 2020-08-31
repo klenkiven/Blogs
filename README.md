@@ -37,11 +37,14 @@ Web/	                   ===JavaWEB的学习笔记
 + JavaScript.md                         ----JavaScript的学习笔记
 + jQuery.md                               ----jQuery 的学习笔记
 + vuejs/              === vue.js的相关笔记
-  + 01-vue实例.md                ----Vue的实例介绍
+  + 01-vue实例.md
+  + 02-vue模板语法.md
+  + 03-计算属性和侦听器.md
 
 MySQL/                  ===MySQL的学习  MySQL 8
 
 + Installation.md                       ----MySQL 8的安装
++ Toubleshooting.md               ----数据库使用过程中遇到的问题
 + SQL_OVERVIEW.md               ----SQL语法概述
 + SQL_DQL.md                          ----SQL的DQL查询语言的学习
 + SQL_DML.md                          ----SQL的DML操作语言的学习

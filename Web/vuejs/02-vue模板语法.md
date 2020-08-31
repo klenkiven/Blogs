@@ -3,10 +3,10 @@
 >  **内容预告：**
 >
 >  + “Mustache”语法：
->
->  + v-once 指令：数据改变一次
+>+ v-once 指令：数据改变一次
 >  + v-html指令：原生html
 >  + v-bind指令：绑定各种Attribute
+>  + v-if指令：如果假，不显示
 
 ## 插值
 
@@ -85,3 +85,56 @@ Mustache 语法不能作用在 HTML attribute 上，遇到这种情况应该使�
 
 + `v-bind` 指令可以用于响应式地更新 HTML attribute
 + `v-on` 指令，它用于监听 DOM 事件：
+
+```html
+<a v-bind:href="url">...</a>
+<a v-on:click="doSomething">...</a>
+```
+
+### 动态参数
+
+> 从 2.6.0 开始，可以用方括号括起来的 JavaScript 表达式作为一个指令的参数
+
+```html
+<!--
+注意，参数表达式的写法存在一些约束，如之后的“对动态参数表达式的约束”章节所述。
+-->
+<a v-bind:[attributeName]="url"> ... </a>
+```
+
+如果你的 Vue 实例有一个 `data` property `attributeName`，其值为 `"href"`，那么这个绑定将等价于 `v-bind:href`。
+
+>  相当于参数也可以动态化了！
+
+### 修饰符
+
+> 修饰符 (modifier) 是以半角句号 `.` 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定。
+
+## 缩写
+
+### `v-bind` 缩写
+
+```html
+<!-- 完整语法 -->
+<a v-bind:href="url">...</a>
+
+<!-- 缩写 -->
+<a :href="url">...</a>
+
+<!-- 动态参数的缩写 (2.6.0+) -->
+<a :[key]="url"> ... </a>
+```
+
+### `v-on` 缩写
+
+```html
+<!-- 完整语法 -->
+<a v-on:click="doSomething">...</a>
+
+<!-- 缩写 -->
+<a @click="doSomething">...</a>
+
+<!-- 动态参数的缩写 (2.6.0+) -->
+<a @[event]="doSomething"> ... </a>
+```
+
