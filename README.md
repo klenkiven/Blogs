@@ -20,18 +20,20 @@ Java/                               	    ===Java的笔记文件
   + Overview.md                         ----JVM笔记的概述部分
   + AMMM-MemoryArea.md    ----Java内存区域
 
-Spring-Framework-Core
+Spring-Framework/
 
-+ Overview.md                         ---- 关于Spring Framework Core 的概述
++ IOC                   ====核心技术IOC容器
+  + 00-Overview.md                         ---- 关于Spring Framework Core 的概述
+  + 01-IoC-Container                        ----IoC容器的学习笔记
+  + 02-Bean-Overview                      ----关于Bean的一些相关概念和描述
+  + Annotation-based-Configuration  ----基于注解的笔记
++ Develop           ====在开发过程中使用的一些笔记
+  + Spring-Mybatis-Integration.md ----Spring和MyBatis整合
 
 UsefulExp/                ===实用的一些经验
 
 + TyporaPlusGithub.md          ----Typora + Github 作为笔记本和图床
 + MvnCentralRepoProblem.md   ----Mven中央仓库repo.maven.apache.org/maven2的错误问题
-
-WebChat/               ===Java网络聊天室
-
-+ WebChat-1.md                       ----网络聊天室小程序的一些记录
 
 Web/	                   ===JavaWEB的学习笔记 
 
@@ -69,11 +71,6 @@ CLRS/
 
 + ShellSort.md                           ----希尔排序
 + InsertSort.md                         ----插入排序
-
-Course/
-
-+ discrete-math/
-  + 基础1-命题逻辑.md
 
 Rust-lang/
 
