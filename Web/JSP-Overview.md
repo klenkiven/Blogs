@@ -1,4 +1,4 @@
-# 动态网页 -- JSP
+# 动态网页 -- JSP (Java Servlet Page)
 
 ## 一、JSP的组成
 

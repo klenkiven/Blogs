@@ -118,4 +118,40 @@ TCP：英文名（Transmission Control Protocol）它是**面向连接**的、**
    netstat -natp
    ```
 
+   ```
+   激活Internet连接 (服务器和已建立连接的)
+   Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+   tcp        0      0 127.0.0.53:53           0.0.0.0:*               LISTEN      603/systemd-resolve
+   tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      765/sshd: /usr/sbin
+   tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      655/cupsd
+   tcp        0      0 127.0.0.1:6010          0.0.0.0:*               LISTEN      2424/sshd: klenkive
+   tcp        0      0 192.168.1.103:22        192.168.1.107:51165     ESTABLISHED 2335/sshd: klenkive
+   tcp        0     48 192.168.1.103:22        192.168.1.107:51164     ESTABLISHED 2333/sshd: klenkive
+   tcp        0      0 192.168.1.103:53160     101.6.8.193:80          TIME_WAIT   -
+   tcp6       0      0 :::22                   :::*                    LISTEN      765/sshd: /usr/sbin
+   tcp6       0      0 ::1:631                 :::*                    LISTEN      655/cupsd
+   tcp6       0      0 ::1:6010                :::*                    LISTEN      2424/sshd: klenkive
+   ```
    
+   > LISTEN这个状态只有服务器才有这个状态
+   
+2. 端口号有多少？
+
+   一共有65535个。0 ~ 65535 就是端口号码的编号
+
+3. 为什么要使用端口号？
+
+   IP   通过IP找到主机
+
+   端口   通过端口找到主机上面的软件服务
+
+   > 进程的端口号时不固定的，因此由不同的进程竞争不同的端口号。那么反过来可以意识到，一个端口号对应一个进程。
+
+   假如说有三个客户端要连接ip号主机的tomcat服务，那么服务端会消耗一个端口号，例如8080。但是每个客户端需要消耗一个，选择是随机的。
+
+4. 套接字`socket`:
+
+   ip + port  ip+port  每一个套接字是独立的，是隔离的。
+
+![image-20210122194435705](D:\KlenKiven\Blogs\img\What-Is-TCP-IP-2.png)
+

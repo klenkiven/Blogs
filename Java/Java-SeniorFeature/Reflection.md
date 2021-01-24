@@ -7,7 +7,7 @@
 
 + 正常方式和反射方式的对比：
 
-  ![image-20200310100027337](D:\KlenKiven\Blogs\Blogs\img\Reflection-1.png)
+  ![image-20200310100027337](./img/Reflection-1.png)
 
 ### Java反射机质研究及其应用
 
